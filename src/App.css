@@ -1,0 +1,73 @@
+* {
+  padding: 0%;
+  margin: 0%;
+  box-sizing: border-box;
+}
+
+.App {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-around; */
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.head {
+  margin: 10vh;
+  width: 1080px;
+}
+.input {
+  display: flex;
+  justify-content: space-around;
+}
+
+.input input {
+  width: 400px;
+  height: 50px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 0 10px;
+  border: 1px solid red;
+  border-radius: 20px;
+}
+.top-btn {
+  background-color: #2978c2;
+}
+table {
+  /* min-width: 1080px; */
+  width: 100%;
+
+  outline: 1px solid rgba(60, 59, 62, 0.133);
+  border-spacing: 0;
+  border-collapse: collapse;
+  width: 1080px;
+  border: 1px solid #ccc;
+}
+td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+table tr {
+  border: 1px solid #ccc;
+}
+table tr:nth-child(even) {
+  background-color: #736c6d5b;
+}
+table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+button {
+  width: 100px;
+  height: 50px;
+  border: none;
+  background-color: rgb(255, 0, 8);
+  border-radius: 5px;
+}
+
+.dlt-icon {
+  width: 10px;
+  background-color: #cb160c;
+}
