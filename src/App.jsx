@@ -1,11 +1,13 @@
 import "./App.css";
 import { useRef, useState } from "react";
+import { onSnapshot, query } from "firebase/firestore";
 import {
   collection,
   addDoc,
   getDoc,
   getDocs,
   deleteDoc,
+  doc,
 } from "firebase/firestore";
 import { db } from "./conponents/firebase-config";
 import { useEffect } from "react";
@@ -29,19 +31,36 @@ function App() {
 
   // !getContacts
   let getContacts = async () => {
-    const querySnapshot = await getDocs(collection(db, "contacts"));
-    let info = [];
-    querySnapshot.forEach((doc) => {
-      let contact = doc.data();
-      contact.id = doc.id;
-      info.push(contact);
-    });
-    setUsers(info);
+    const q = query(collection(db, "contacts"));
+    const unsub = onSnapshot(q, (querySnapshot) => {
+      const info = [];
+      querySnapshot.forEach((doc => {
+        // console.log("🚀 ~ file: App.jsx ~ line 38 ~ unsub ~ doc", doc.id)
+        let tem = doc.data();
+        tem.id = doc.id;
+
+        info.push(tem);
+      }))
+      setUsers(info);
+    })
+
+
+
+    // const querySnapshot = await getDocs(collection(db, "contacts"));
+    // let info = [];
+    // querySnapshot.forEach((doc) => {
+    //   let contact = doc.data();
+    //   contact.id = doc.id;
+    //   info.push(contact);
+    // });
+    // setUsers(info);
   };
 
   // !delete contacts
   let deleteContacts = async (id) => {
-    await deleteDoc(collection(db, "cities", id));
+    let res = await deleteDoc(doc(db, "contacts", id));
+    // console.log("🚀 ~ file: App.jsx ~ line 46 ~ deleteContacts ~ res", res)
+    console.log("deleted")
   };
 
   useEffect(() => {
@@ -80,6 +99,8 @@ function App() {
           </thead>
           <tbody>
             {users.map((user) => {
+              // console.log(user)
+
               return (
                 <tr key={user.id}>
                   <td>{user.id}</td>
